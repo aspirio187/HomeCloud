@@ -10,7 +10,7 @@ using System.Security.Principal;
 
 namespace HomeCloud.Shared.Helpers
 {
-    public static class DirectoryHelper
+    internal static class DirectoryHelper
     {
         /// <summary>
         /// Check if current user has R/W rights on the folder
