@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace HomeCloud.Shared
 {
-    public delegate void ErrorOccured(string message);
+    public delegate void ErrorOccured(Exception e);
 
     public class Watcher
     {
-        public event ErrorOccured Erreur;
+        public event ErrorOccured? OnErrorOnccured;
         public FileSystemWatcher FileWatcher { get; private set; }
         public string ReceiverFullPath { get; private set; }
 
         public Watcher(string folderFullPath, string receiverFullPath)
         {
             if (string.IsNullOrEmpty(folderFullPath)) throw new ArgumentNullException(nameof(folderFullPath));
-            if (string.IsNullOrEmpty(receiverFullPath)) throw new ArgumentNullException(nameof(receiverFullPath);
+            if (string.IsNullOrEmpty(receiverFullPath)) throw new ArgumentNullException(nameof(receiverFullPath));
             if (!Directory.Exists(folderFullPath))
             {
                 Directory.CreateDirectory(folderFullPath);
@@ -67,7 +67,7 @@ namespace HomeCloud.Shared
 
         private void OnError(object sender, ErrorEventArgs e)
         {
-            throw new NotImplementedException();
+            OnErrorOnccured?.Invoke(e.GetException());
         }
 
         private void OnRenamed(object sender, RenamedEventArgs e)
