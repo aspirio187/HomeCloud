@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeCloud.Shared", "HomeCloud.Shared\HomeCloud.Shared.csproj", "{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC2321C2-E169-441E-9DE9-971ED9B8FCD4}
+	EndGlobalSection
+EndGlobal
