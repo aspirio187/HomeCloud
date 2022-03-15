@@ -19,5 +19,10 @@ namespace HomeCloud.Desktop.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public override string ToString()
+        {
+            return $"{this.GetType().Name}";
+        }
     }
 }

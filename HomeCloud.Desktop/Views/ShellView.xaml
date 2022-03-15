@@ -3,14 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HomeCloud.Desktop.Views"
+        xmlns:views="clr-namespace:HomeCloud.Desktop.Views"
         xmlns:vm="clr-namespace:HomeCloud.Desktop.ViewModels"
-        DataContext="vm:ShellViewModel"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800"
         WindowStartupLocation="CenterScreen" WindowStyle="None">
+
     <Border BorderBrush="DarkGray" BorderThickness="2">
         <Grid>
+
+            <Grid.Resources>
+                <DataTemplate DataType="{x:Type vm:FirstViewModel}">
+                    <views:FirstView />
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type vm:SecondViewModel}" >
+                    <views:SecondView />
+                </DataTemplate>
+            </Grid.Resources>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -27,11 +38,11 @@
             </DockPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="0">
-                <RadioButton Content="Journal" Command="{Binding NavigateJournal}" IsChecked="True" />
-                <RadioButton Content="Paramètres" Command="{Binding NavigateParameters}" />
+                <RadioButton Content="Journal" Command="{Binding NavigateFirstCommand}" IsChecked="True" />
+                <RadioButton Content="Paramètres" Command="{Binding NavigateSecondCommand}" />
             </StackPanel>
 
-            <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentView}"
+            <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentViewModel}"
                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
         </Grid>
     </Border>
