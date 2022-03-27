@@ -9,6 +9,7 @@ namespace HomeCloud.Shared
     public enum FileTypeEnum
     {
         File,
-        Directory
+        Directory,
+        Unavailable
     }
 }

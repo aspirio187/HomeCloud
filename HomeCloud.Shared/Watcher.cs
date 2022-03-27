@@ -18,12 +18,10 @@ namespace HomeCloud.Shared
         public event OnChangesOccured? OnChangesOccured;
 
         public FileSystemWatcher FileWatcher { get; private set; }
-        public string ReceiverFullPath { get; private set; }
 
-        public Watcher(string folderFullPath, string receiverFullPath)
+        public Watcher(string folderFullPath)
         {
             if (string.IsNullOrEmpty(folderFullPath)) throw new ArgumentNullException(nameof(folderFullPath));
-            if (string.IsNullOrEmpty(receiverFullPath)) throw new ArgumentNullException(nameof(receiverFullPath));
             if (!Directory.Exists(folderFullPath))
             {
                 Directory.CreateDirectory(folderFullPath);
@@ -45,8 +43,6 @@ namespace HomeCloud.Shared
                     }
                 }
             }
-
-            ReceiverFullPath = receiverFullPath;
 
             FileWatcher = new FileSystemWatcher(folderFullPath);
         }

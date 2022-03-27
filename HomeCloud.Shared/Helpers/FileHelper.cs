@@ -10,9 +10,12 @@ namespace HomeCloud.Shared.Helpers
     {
         public static bool IsFile(string path)
         {
-            FileAttributes attr = File.GetAttributes(path);
+            if (File.Exists(path) || Directory.Exists(path))
+            {
+                FileAttributes attr = File.GetAttributes(path);
 
-            if (attr.HasFlag(FileAttributes.Directory)) return false;
+                if (attr.HasFlag(FileAttributes.Directory)) return false;
+            }
 
             return true;
         }

@@ -45,7 +45,16 @@ namespace HomeCloud.Shared
             if (fullPath.Trim().Length <= 0) throw new ArgumentException($"{nameof(fullPath)} cannot be an empty string!");
 
             ChangeType = changes;
-            Type = FileHelper.IsFile(fullPath) ? FileTypeEnum.File : FileTypeEnum.Directory;
+
+            if (changes == ChangesEnum.Deleted)
+            {
+                Type = FileTypeEnum.Unavailable;
+            }
+            else
+            {
+                Type = FileHelper.IsFile(fullPath) ? FileTypeEnum.File : FileTypeEnum.Directory;
+            }
+
             FileFullPath = fullPath;
 
             if (changes == ChangesEnum.Renamed)
