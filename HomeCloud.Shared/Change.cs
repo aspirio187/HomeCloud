@@ -12,12 +12,12 @@ namespace HomeCloud.Shared
         /// <summary>
         /// Describes the change type that occured.
         /// </summary>
-        public ChangesEnum ChangeType { get; private set; }
+        public ChangeType ChangeType { get; private set; }
 
         /// <summary>
         /// Describes the type of data that changed (File or Directory).
         /// </summary>
-        public FileTypeEnum Type { get; private set; }
+        public ElementType Type { get; private set; }
 
         /// <summary>
         /// Describes the full file path.
@@ -39,25 +39,25 @@ namespace HomeCloud.Shared
         /// <code>ChangesEnum.Renamed</c> <</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public Change(ChangesEnum changes, string fullPath, string? oldPath = null)
+        public Change(ChangeType changes, string fullPath, string? oldPath = null)
         {
             if (fullPath is null) throw new ArgumentNullException(nameof(fullPath));
             if (fullPath.Trim().Length <= 0) throw new ArgumentException($"{nameof(fullPath)} cannot be an empty string!");
 
             ChangeType = changes;
 
-            if (changes == ChangesEnum.Deleted)
+            if (changes == ChangeType.Deleted)
             {
-                Type = FileTypeEnum.Unavailable;
+                Type = ElementType.Unavailable;
             }
             else
             {
-                Type = FileHelper.IsFile(fullPath) ? FileTypeEnum.File : FileTypeEnum.Directory;
+                Type = FileHelper.IsFile(fullPath) ? ElementType.File : ElementType.Directory;
             }
 
             FileFullPath = fullPath;
 
-            if (changes == ChangesEnum.Renamed)
+            if (changes == ChangeType.Renamed)
             {
                 if (oldPath is null) throw new ArgumentNullException(nameof(oldPath));
                 if (oldPath.Trim().Length <= 0) throw new ArgumentException($"{nameof(oldPath)} cannot be an empty string!");

@@ -15,11 +15,11 @@ namespace HomeCloud.Shared.Helpers
         /// <summary>
         /// Check if current user has R/W rights on the folder
         /// </summary>
-        /// <param name="fullPath">Directory full path</param>
-        /// <param name="ntAccountName">Os account name</param>
+        /// <param name="fullPath">Directory absolute path</param>
+        /// <param name="ntAccountName">Os account name required if actual operating system is Windows</param>
         /// <returns>true If user has R/W rights. false Otherwise</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public static bool DirectoryHasWriteAccess(string fullPath, string ntAccountName = null)
+        public static bool DirectoryHasWriteAccess(string fullPath, string? ntAccountName = null)
         {
             if (string.IsNullOrEmpty(fullPath)) throw new ArgumentNullException(nameof(fullPath));
 

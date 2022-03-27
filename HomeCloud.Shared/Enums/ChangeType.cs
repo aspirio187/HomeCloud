@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace HomeCloud.Shared
 {
-    public enum ChangesEnum
+    /// <summary>
+    /// Represent the different types of changes that can occur
+    /// </summary>
+    public enum ChangeType
     {
         Changed,
         Deleted,

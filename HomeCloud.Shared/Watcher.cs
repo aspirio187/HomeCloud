@@ -9,16 +9,47 @@ using System.Threading.Tasks;
 
 namespace HomeCloud.Shared
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="e">Exception</param>
     public delegate void OnErrorOccured(Exception e);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="change"></param>
     public delegate void OnChangesOccured(Change change);
 
+    /// <summary>
+    /// Watch files in a directory and invoke events if changes happen
+    /// </summary>
     public class Watcher
     {
+        /// <summary>
+        /// Represent to watched directory absolute path
+        /// </summary>
+        private readonly string _directoryAbsolutePath;
+
+        /// <summary>
+        /// Event invoked in an error occured during watch
+        /// </summary>
         public event OnErrorOccured? OnErrorOnccured;
+
+        /// <summary>
+        /// Event invoked after a change has occured
+        /// </summary>
         public event OnChangesOccured? OnChangesOccured;
 
-        public FileSystemWatcher FileWatcher { get; private set; }
+        public FileSystemWatcher? FileWatcher { get; private set; }
 
+        /// <summary>
+        /// Instance of Watcher that takes the absolute path to a folder.
+        /// </summary>
+        /// <param name="folderFullPath">Absolute path to a folder</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="IOException"></exception>
+        /// <exception cref="UnauthorizedAccessException"></exception>
         public Watcher(string folderFullPath)
         {
             if (string.IsNullOrEmpty(folderFullPath)) throw new ArgumentNullException(nameof(folderFullPath));
@@ -28,6 +59,9 @@ namespace HomeCloud.Shared
             }
             else
             {
+                if (FileHelper.IsFile(folderFullPath))
+                    throw new IOException($"Element at path \"{folderFullPath}\" must be a directory");
+
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
                     if (!DirectoryHelper.DirectoryHasWriteAccess(folderFullPath, WindowsIdentity.GetCurrent().Name))
@@ -44,11 +78,19 @@ namespace HomeCloud.Shared
                 }
             }
 
-            FileWatcher = new FileSystemWatcher(folderFullPath);
+            _directoryAbsolutePath = folderFullPath;
         }
 
+        /// <summary>
+        /// Start the watcher. Must be subscribed to <see cref="OnChangesOccured"/> and <see cref="OnErrorOnccured"/>
+        /// before otherwise it won't work.
+        /// </summary>
         public void Start()
         {
+            if (FileWatcher is not null) throw new Exception($"Stop the previous Watcher before starting a new one!");
+
+            FileWatcher = new FileSystemWatcher(_directoryAbsolutePath);
+
             FileWatcher.NotifyFilter = NotifyFilters.Attributes
                                  | NotifyFilters.CreationTime
                                  | NotifyFilters.DirectoryName
@@ -67,8 +109,22 @@ namespace HomeCloud.Shared
             FileWatcher.EnableRaisingEvents = true;
         }
 
+        /// <summary>
+        /// Stop the watcher and unsubscribed every handler from <see cref="OnErrorOnccured"/> and <see cref="OnChangesOccured"/>
+        /// </summary>
         public void Stop()
         {
+            if (FileWatcher is null) throw new Exception($"Watcher cannot be stopped if it hasn't been started!");
+
+            FileWatcher.Changed -= OnChanged;
+            FileWatcher.Created -= OnCreated;
+            FileWatcher.Deleted -= OnDeleted;
+            FileWatcher.Renamed -= OnRenamed;
+            FileWatcher.Error -= OnError;
+
+            OnErrorOnccured = null;
+            OnChangesOccured = null;
+
             FileWatcher.Dispose();
         }
 
@@ -79,26 +135,26 @@ namespace HomeCloud.Shared
 
         private void OnRenamed(object sender, RenamedEventArgs e)
         {
-            Change change = new Change(ChangesEnum.Renamed, e.FullPath, e.OldFullPath);
+            Change change = new Change(ChangeType.Renamed, e.FullPath, e.OldFullPath);
 
             OnChangesOccured?.Invoke(change);
         }
 
         private void OnDeleted(object sender, FileSystemEventArgs e)
         {
-            Change change = new Change(ChangesEnum.Deleted, e.FullPath);
+            Change change = new Change(ChangeType.Deleted, e.FullPath);
             OnChangesOccured?.Invoke(change);
         }
 
         private void OnCreated(object sender, FileSystemEventArgs e)
         {
-            Change change = new Change(ChangesEnum.Created, e.FullPath);
+            Change change = new Change(ChangeType.Created, e.FullPath);
             OnChangesOccured?.Invoke(change);
         }
 
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
-            Change change = new Change(ChangesEnum.Changed, e.FullPath);
+            Change change = new Change(ChangeType.Changed, e.FullPath);
             OnChangesOccured?.Invoke(change);
         }
     }
