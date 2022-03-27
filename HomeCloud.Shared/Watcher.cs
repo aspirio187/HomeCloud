@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 
 namespace HomeCloud.Shared
 {
-    public delegate void ErrorOccured(Exception e);
+    public delegate void OnErrorOccured(Exception e);
+    public delegate void OnChangesOccured(Change change);
 
     public class Watcher
     {
-        public event ErrorOccured? OnErrorOnccured;
+        public event OnErrorOccured? OnErrorOnccured;
+        public event OnChangesOccured? OnChangesOccured;
+
         public FileSystemWatcher FileWatcher { get; private set; }
         public string ReceiverFullPath { get; private set; }
 
@@ -29,11 +32,17 @@ namespace HomeCloud.Shared
             {
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    DirectoryHelper.DirectoryHasWriteAccess(folderFullPath, WindowsIdentity.GetCurrent().Name);
+                    if (!DirectoryHelper.DirectoryHasWriteAccess(folderFullPath, WindowsIdentity.GetCurrent().Name))
+                    {
+                        throw new UnauthorizedAccessException(folderFullPath);
+                    }
                 }
                 else
                 {
-                    DirectoryHelper.DirectoryHasWriteAccess(folderFullPath);
+                    if (!DirectoryHelper.DirectoryHasWriteAccess(folderFullPath))
+                    {
+                        throw new UnauthorizedAccessException(folderFullPath);
+                    }
                 }
             }
 
@@ -48,7 +57,9 @@ namespace HomeCloud.Shared
                                  | NotifyFilters.CreationTime
                                  | NotifyFilters.DirectoryName
                                  | NotifyFilters.FileName
-                                 | NotifyFilters.Size;
+                                 | NotifyFilters.Size
+                                 | NotifyFilters.LastAccess
+                                 | NotifyFilters.LastWrite;
 
             FileWatcher.Changed += OnChanged;
             FileWatcher.Created += OnCreated;
@@ -72,22 +83,27 @@ namespace HomeCloud.Shared
 
         private void OnRenamed(object sender, RenamedEventArgs e)
         {
-            throw new NotImplementedException();
+            Change change = new Change(ChangesEnum.Renamed, e.FullPath, e.OldFullPath);
+
+            OnChangesOccured?.Invoke(change);
         }
 
         private void OnDeleted(object sender, FileSystemEventArgs e)
         {
-            throw new NotImplementedException();
+            Change change = new Change(ChangesEnum.Deleted, e.FullPath);
+            OnChangesOccured?.Invoke(change);
         }
 
         private void OnCreated(object sender, FileSystemEventArgs e)
         {
-            throw new NotImplementedException();
+            Change change = new Change(ChangesEnum.Created, e.FullPath);
+            OnChangesOccured?.Invoke(change);
         }
 
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
-            throw new NotImplementedException();
+            Change change = new Change(ChangesEnum.Changed, e.FullPath);
+            OnChangesOccured?.Invoke(change);
         }
     }
 }
