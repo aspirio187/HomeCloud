@@ -128,11 +128,21 @@ namespace HomeCloud.Shared
             FileWatcher.Dispose();
         }
 
+        /// <summary>
+        /// Called if an error happen during directory watch and invoke <see cref="OnErrorOnccured"/> delegate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnError(object sender, ErrorEventArgs e)
         {
             OnErrorOnccured?.Invoke(e.GetException());
         }
 
+        /// <summary>
+        /// Called if a renaming occured during directory watch and invoke <see cref="OnChangesOccured"/> delegate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnRenamed(object sender, RenamedEventArgs e)
         {
             Change change = new Change(ChangeType.Renamed, e.FullPath, e.OldFullPath);
@@ -140,18 +150,33 @@ namespace HomeCloud.Shared
             OnChangesOccured?.Invoke(change);
         }
 
+        /// <summary>
+        /// Called if a deletion occured during directory watch and invoke <see cref="OnChangesOccured"/> delegate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnDeleted(object sender, FileSystemEventArgs e)
         {
             Change change = new Change(ChangeType.Deleted, e.FullPath);
             OnChangesOccured?.Invoke(change);
         }
 
+        /// <summary>
+        /// Called if a creation occured during directory watch and invoke <see cref="OnChangesOccured"/> delegate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnCreated(object sender, FileSystemEventArgs e)
         {
             Change change = new Change(ChangeType.Created, e.FullPath);
             OnChangesOccured?.Invoke(change);
         }
 
+        /// <summary>
+        /// Called if a change occured during directory watch and invoke <see cref="OnChangesOccured"/> delegate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
             Change change = new Change(ChangeType.Changed, e.FullPath);
