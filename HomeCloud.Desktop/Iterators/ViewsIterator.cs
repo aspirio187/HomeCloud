@@ -35,9 +35,17 @@ namespace HomeCloud.Desktop.Iterators
             get
             {
                 if (_controls is null) throw new NullReferenceException(nameof(_controls));
-                if (_position < 0 || _position >= _controls.Length) throw new ArgumentOutOfRangeException(nameof(_position));
+                if (_position < 0 || _position >= _controls.Length) throw new InvalidOperationException();
                 return _controls[_position];
             }
+        }
+
+        /// <summary>
+        /// Return the numbers of elements in this enumerator
+        /// </summary>
+        public int Length
+        {
+            get => _controls is not null ? _controls.Length : throw new InvalidOperationException();
         }
 
         /// <summary>
@@ -101,6 +109,23 @@ namespace HomeCloud.Desktop.Iterators
             Array.Copy(_controls, controls, controls.Length);
             controls[controls.Length - 1] = contentControl;
             _controls = controls;
+        }
+
+        /// <summary>
+        /// Check if any element of the enumerator matches the function
+        /// </summary>
+        /// <param name="predicate">predicate function takeing a ContentControl and returning a boolean</param>
+        /// <returns>true If any element matches the function. false Otherwise</returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public bool Any(Func<ContentControl, bool> predicate)
+        {
+            if (_controls is null) throw new InvalidOperationException();
+
+            for (int i = 0; i < _controls.Length; i++)
+            {
+                if (predicate.Invoke(_controls[i])) return true;
+            }
+            return false;
         }
 
         /// <summary>

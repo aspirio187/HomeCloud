@@ -1,76 +1,111 @@
-﻿using HomeCloud.Desktop.ViewModels;
+﻿using HomeCloud.Desktop.Iterators;
+using HomeCloud.Desktop.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace HomeCloud.Desktop.Managers
 {
     public class NavigationManager
     {
+        /// <summary>
+        /// The service provider containing all injected services
+        /// </summary>
         private readonly IServiceProvider _serviceProvider;
+
+        /// <summary>
+        /// The current assembly
+        /// </summary>
         private readonly Assembly _currentAssembly;
 
-        public event Action? OnCurrentViewModelChanged;
+        /// <summary>
+        /// Event executed when the <see cref="CurrentView"/> value changes
+        /// </summary>
+        public event Action? OnCurrentViewChanged;
 
-        public List<ViewModelBase> NavigationStack { get; private set; }
+        /// <summary>
+        /// The navigation stack containing every view to which we already navigated
+        /// </summary>
+        public ViewsIterator NavigationStack { get; private set; }
 
-        private ViewModelBase? _currentViewModel;
+        /// <summary>
+        /// The current view, is null by default
+        /// </summary>
+        private ContentControl? _currentView = null;
 
-        public ViewModelBase? CurrentViewModel
+        /// <summary>
+        /// Get the current view or Set the current view and execute <see cref="OnCurrentViewChanged"/> event
+        /// </summary>
+        public ContentControl? CurrentView
         {
-            get { return _currentViewModel; }
+            get { return _currentView; }
             set
             {
-                _currentViewModel = value;
-                CurrentViewModelChanged();
+                _currentView = value;
+                OnCurrentViewChanged?.Invoke();
             }
         }
 
-
+        /// <summary>
+        /// Create an instance of NavigationManager
+        /// </summary>
+        /// <param name="serviceProvider"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NullReferenceException"></exception>
         public NavigationManager(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider ??
                 throw new ArgumentNullException(nameof(serviceProvider));
 
-            _currentAssembly = AppDomain.CurrentDomain.GetAssemblies()?.FirstOrDefault(a => a.FullName.Contains(AppDomain.CurrentDomain.FriendlyName));
-            if (_currentAssembly is null) throw new NullReferenceException($"Could not load assembly with name {nameof(_currentAssembly)}!");
+            AppDomain currentDomain = AppDomain.CurrentDomain ?? throw new NullReferenceException(nameof(AppDomain.CurrentDomain));
+            Assembly[] assemblies = currentDomain.GetAssemblies();
+            _currentAssembly = assemblies.SingleOrDefault(a => a.FullName is not null && a.FullName.Contains(currentDomain.FriendlyName)) ??
+                throw new NullReferenceException(nameof(_currentAssembly));
 
-            NavigationStack = new List<ViewModelBase>();
+            NavigationStack = new ViewsIterator();
         }
 
-        public void CurrentViewModelChanged()
+        /// <summary>
+        /// Change the currentview to the one given by its name in parameter. Allow to save the view in the
+        /// navigation stack
+        /// </summary>
+        /// <param name="viewName">Desired view's name</param>
+        /// <param name="save">Save the view in the navigation stack</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="NullReferenceException"></exception>
+        public void Navigate(string viewName, bool save = false)
         {
-            OnCurrentViewModelChanged?.Invoke();
-        }
+            if (string.IsNullOrEmpty(viewName)) throw new ArgumentNullException(nameof(viewName));
 
-        public void Navigate(string viewModelName, bool save = false)
-        {
-            if (string.IsNullOrEmpty(viewModelName)) throw new ArgumentNullException(nameof(viewModelName));
+            ContentControl? view = NavigationStack[viewName];
 
-            ViewModelBase? vm = NavigationStack.SingleOrDefault(v => v.ToString().Equals(viewModelName));
-
-            if (vm is null)
+            if (view is null)
             {
-                Type? vmType = _currentAssembly.DefinedTypes.SingleOrDefault(t => t.Name.Equals(viewModelName));
-                if (vmType is null) throw new NullReferenceException($"No ViewModel with name {nameof(viewModelName)} was found!");
-                vm = _serviceProvider.GetService(vmType) as ViewModelBase;
+                Type vmType = _currentAssembly.DefinedTypes.SingleOrDefault(t => t.Name.Equals(viewName))
+                    ?? throw new NullReferenceException($"No view with name {viewName} was found!");
+
+                view = _serviceProvider.GetService(vmType) as ContentControl;
             }
 
-            CurrentViewModel = vm;
+            CurrentView = view;
 
-            if (save && !NavigationStack.Any(v => v.ToString().Equals(viewModelName)))
+            if (save && view is not null && !NavigationStack.Any(v => v.ToString().Equals(viewName)))
             {
-                NavigationStack.Add(vm);
+                NavigationStack.Add(view);
             }
         }
 
+        /// <summary>
+        /// Check if it is possible the navigate back in the navigation stack
+        /// </summary>
+        /// <returns></returns>
         public bool CanNavigateBack()
         {
-            if (NavigationStack.Count == 0) return false;
-            //if(NavigationStack.las)
+            if (NavigationStack.Length == 0) return false;
             return true;
         }
     }

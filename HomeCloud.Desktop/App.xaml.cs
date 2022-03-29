@@ -1,4 +1,5 @@
-﻿using HomeCloud.Desktop.Managers;
+﻿using HomeCloud.Desktop.Iterators;
+using HomeCloud.Desktop.Managers;
 using HomeCloud.Desktop.ViewModels;
 using HomeCloud.Desktop.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,33 +18,35 @@ namespace HomeCloud.Desktop
     /// </summary>
     public partial class App : Application
     {
-        private readonly IServiceProvider _serviceProvider;
+        public static IServiceProvider? ServiceProvider { get; private set; }
 
         public App()
         {
             ServiceCollection services = new ServiceCollection();
             ConfigureServices(services);
-            _serviceProvider = services.BuildServiceProvider();
+            ServiceProvider = services.BuildServiceProvider();
         }
 
         public void ConfigureServices(ServiceCollection services)
         {
-            services.AddScoped<NavigationManager>();
+            /****************************************/
+            /************** Managers ****************/
+            /****************************************/
+
+            services.AddSingleton<NavigationManager>();
+
+            /****************************************/
+            /************* ViewModels ***************/
+            /****************************************/
 
             services.AddTransient<ShellViewModel>();
             services.AddTransient<FirstViewModel>();
             services.AddTransient<SecondViewModel>();
-
-
-
-            services.AddSingleton<ShellView>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            ShellView? shellView = _serviceProvider.GetService<ShellView>();
-            if (shellView is null) throw new ApplicationException($"The shell view cannot be loaded");
-            shellView.DataContext = _serviceProvider.GetService<ShellViewModel>();
+            ShellView shellView = new ShellView();
             shellView.Show();
         }
     }

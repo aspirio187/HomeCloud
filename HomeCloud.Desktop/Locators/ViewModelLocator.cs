@@ -9,6 +9,8 @@ namespace HomeCloud.Desktop.Locators
 {
     public class ViewModelLocator
     {
+        public static IServiceProvider ServiceProvider = App.ServiceProvider ?? throw new ArgumentNullException(nameof(ServiceProvider));
+
         public static bool GetAutoConnectedViewModelPRoperty(DependencyObject obj)
         {
             return (bool)obj.GetValue(AutoConnectedViewModelProperty);
@@ -40,7 +42,7 @@ namespace HomeCloud.Desktop.Locators
             Type viewModelType = currentAssembly.DefinedTypes.SingleOrDefault(t => t.Name.Equals(viewModelTypeName))
                 ?? throw new NullReferenceException(nameof(viewModelTypeName));
 
-            object viewModel = Activator.CreateInstance(viewModelType) ?? throw new NullReferenceException(nameof(viewModel));
+            object viewModel = ServiceProvider.GetService(viewModelType) ?? throw new NullReferenceException(nameof(viewModelType));
 
             ((FrameworkElement)obj).DataContext = viewModel;
         }

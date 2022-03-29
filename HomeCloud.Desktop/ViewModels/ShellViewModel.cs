@@ -66,7 +66,7 @@ namespace HomeCloud.Desktop.ViewModels
             NavigateFirstCommand = new NavigateCommand(NavigateFirst);
             NavigateSecondCommand = new NavigateCommand(NavigateSecond);
 
-            _navigationManager.OnCurrentViewModelChanged += CurrentViewModelChanged;
+            _navigationManager.OnCurrentViewChanged += CurrentViewModelChanged;
 
             NavigateFirstCommand.Execute(this);
         }
@@ -90,8 +90,8 @@ namespace HomeCloud.Desktop.ViewModels
 
         private void CurrentViewModelChanged()
         {
-            if (_navigationManager.CurrentViewModel is null) return;
-            CurrentViewModel = _navigationManager.CurrentViewModel;
+            if (_navigationManager.CurrentView is null) return;
+            CurrentViewModel = _navigationManager.CurrentView;
         }
     }
 }

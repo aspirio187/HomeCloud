@@ -19,7 +19,7 @@ namespace HomeCloud.Desktop.Views
     /// </summary>
     public partial class ShellView : Window
     {
-        public ShellView(IServiceProvider serviceProvider)
+        public ShellView()
         {
             InitializeComponent();
         }
