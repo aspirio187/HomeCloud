@@ -85,15 +85,17 @@ namespace HomeCloud.Desktop.Managers
 
             if (view is null)
             {
-                Type vmType = _currentAssembly.DefinedTypes.SingleOrDefault(t => t.Name.Equals(viewName))
+                Type viewType = _currentAssembly.DefinedTypes.SingleOrDefault(t => t.Name.Equals(viewName))
                     ?? throw new NullReferenceException($"No view with name {viewName} was found!");
 
-                view = _serviceProvider.GetService(vmType) as ContentControl;
+                view = Activator.CreateInstance(viewType) as ContentControl;
             }
+
+            if (view is null) throw new NullReferenceException(nameof(view));
 
             CurrentView = view;
 
-            if (save && view is not null && !NavigationStack.Any(v => v.ToString().Equals(viewName)))
+            if (save && !NavigationStack.Any(v => v.ToString().Equals(viewName)))
             {
                 NavigationStack.Add(view);
             }
@@ -102,7 +104,7 @@ namespace HomeCloud.Desktop.Managers
         /// <summary>
         /// Check if it is possible the navigate back in the navigation stack
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if </returns>
         public bool CanNavigateBack()
         {
             if (NavigationStack.Length == 0) return false;
