@@ -43,6 +43,21 @@ namespace HomeCloud.Desktop.Iterators
         }
 
         /// <summary>
+        /// Get a <see cref="Change"/> object at a defined index
+        /// </summary>
+        /// <param name="index">Index of the element to get</param>
+        /// <returns>A <see cref="Change"/> object from FilesIterator</returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public Change this[int index]
+        {
+            get
+            {
+                if (_changes is null) throw new NullReferenceException(nameof(_changes));
+                return _changes[index];
+            }
+        }
+
+        /// <summary>
         /// Add an element in FilesIterator and invoke <see cref="OnElementAdded"/> event
         /// </summary>
         /// <param name="change">Object <see cref="Change"/> to add in FilesIterator</param>
