@@ -5,15 +5,15 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Shared", "HomeCloud.Shared\HomeCloud.Shared.csproj", "{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Desktop.UIL", "HomeCloud.Desktop\HomeCloud.Desktop.UIL.csproj", "{33392223-450B-4945-B4E9-3D89F688F936}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Web", "HomeCloud.Web\HomeCloud.Web.csproj", "{E135DDB9-D32A-4D73-BF53-49975C07BE23}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Console", "HomeCloud.Console\HomeCloud.Console.csproj", "{54CDB7DD-0FD6-4D20-91AA-837FCCC90A24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeCloud.Helpers", "HomeCloud.Helpers\HomeCloud.Helpers.csproj", "{40FD4AD7-5B85-4267-8209-BD645F42CCCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Helpers", "HomeCloud.Helpers\HomeCloud.Helpers.csproj", "{40FD4AD7-5B85-4267-8209-BD645F42CCCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeCloud.Desktop.BLL", "HomeCloud.Desktop.BLL\HomeCloud.Desktop.BLL.csproj", "{C35C706E-27AF-4466-B988-C8A6DF792105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Desktop.BLL", "HomeCloud.Desktop.BLL\HomeCloud.Desktop.BLL.csproj", "{C35C706E-27AF-4466-B988-C8A6DF792105}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Desktop.UIL", "HomeCloud.Desktop.UIL\HomeCloud.Desktop.UIL.csproj", "{2753206D-880A-4A10-83A9-A72E40123CC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33392223-450B-4945-B4E9-3D89F688F936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33392223-450B-4945-B4E9-3D89F688F936}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33392223-450B-4945-B4E9-3D89F688F936}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33392223-450B-4945-B4E9-3D89F688F936}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E135DDB9-D32A-4D73-BF53-49975C07BE23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E135DDB9-D32A-4D73-BF53-49975C07BE23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E135DDB9-D32A-4D73-BF53-49975C07BE23}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +41,10 @@ Global
 		{C35C706E-27AF-4466-B988-C8A6DF792105}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C35C706E-27AF-4466-B988-C8A6DF792105}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C35C706E-27AF-4466-B988-C8A6DF792105}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2753206D-880A-4A10-83A9-A72E40123CC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2753206D-880A-4A10-83A9-A72E40123CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2753206D-880A-4A10-83A9-A72E40123CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2753206D-880A-4A10-83A9-A72E40123CC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
