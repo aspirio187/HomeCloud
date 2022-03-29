@@ -11,10 +11,12 @@ namespace HomeCloud.Desktop.Commands
     public class NavigateCommand : ICommand
     {
         public event Action Navigate;
+        public bool CanNavigate { get; set; }
 
-        public NavigateCommand(Action navigate)
+        public NavigateCommand(Action navigate, bool canNavigate = true)
         {
             Navigate = navigate;
+            CanNavigate = canNavigate;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -22,7 +24,7 @@ namespace HomeCloud.Desktop.Commands
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return CanNavigate;
         }
 
         public void Execute(object? parameter)

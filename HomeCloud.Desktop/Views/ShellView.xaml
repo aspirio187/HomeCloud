@@ -5,26 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:HomeCloud.Desktop.Views"
         xmlns:vm="clr-namespace:HomeCloud.Desktop.ViewModels"
+        xmlns:controls="clr-namespace:HomeCloud.Desktop.Controls"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800"
         WindowStartupLocation="CenterScreen" WindowStyle="None">
 
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:SecondViewModel}" >
+            <views:SecondView />
+        </DataTemplate>
+    </Window.Resources>
+
     <Border BorderBrush="DarkGray" BorderThickness="2">
         <Grid>
-
-            <Grid.Resources>
-                <DataTemplate DataType="{x:Type vm:FirstViewModel}">
-                    <views:FirstView />
-                </DataTemplate>
-
-                <DataTemplate DataType="{x:Type vm:SecondViewModel}" >
-                    <views:SecondView />
-                </DataTemplate>
-            </Grid.Resources>
-            
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="15"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -37,13 +34,16 @@
                 <Button HorizontalAlignment="Right" Content="X" FontSize="15" Width="30" Height="30" />
             </DockPanel>
 
-            <StackPanel Grid.Row="1" Grid.Column="0">
+            <StackPanel Grid.Row="1" Grid.Column="0" >
                 <RadioButton Content="Journal" Command="{Binding NavigateFirstCommand}" IsChecked="True" />
                 <RadioButton Content="Paramètres" Command="{Binding NavigateSecondCommand}" />
             </StackPanel>
 
-            <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentViewModel}"
+            <controls:Footer Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Status="{Binding IsSuccess}"></controls:Footer>
+
+            <ContentControl Grid.Row="1" Grid.Column="1" Content="{Binding CurrentView}"
                             VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+
         </Grid>
     </Border>
 </Window>
