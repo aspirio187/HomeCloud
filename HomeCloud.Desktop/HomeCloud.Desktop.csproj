@@ -16,4 +16,9 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HomeCloud.Helpers\HomeCloud.Helpers.csproj" />
+    <ProjectReference Include="..\HomeCloud.Shared\HomeCloud.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
