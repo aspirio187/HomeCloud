@@ -17,27 +17,14 @@ namespace HomeCloud.Desktop.ViewModels
         public ICommand NavigateFirstCommand { get; set; }
         public ICommand NavigateSecondCommand { get; set; }
 
-        private ContentControl _currentView;
+        private ContentControl _currentView = null;
 
-        public ContentControl CurrentView
+        public ContentControl? CurrentView
         {
             get { return _currentView; }
             set
             {
-                _currentView = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-
-        private ViewModelBase? _currentViewModel;
-
-        public ViewModelBase? CurrentViewModel
-        {
-            get { return _currentViewModel; }
-            set
-            {
-                _currentViewModel = value;
+                _currentView = value ?? throw new NullReferenceException();
                 NotifyPropertyChanged();
             }
         }
@@ -60,9 +47,6 @@ namespace HomeCloud.Desktop.ViewModels
             _navigationManager = navigationManager ??
                 throw new ArgumentNullException(nameof(navigationManager));
 
-            //NavigateFirstCommand = new NavigateCommand<FirstViewModel>(_navigationManager, new FirstViewModel());
-            //NavigateSecondCommand = new NavigateCommand<SecondViewModel>(_navigationManager, new SecondViewModel());
-
             NavigateFirstCommand = new NavigateCommand(NavigateFirst);
             NavigateSecondCommand = new NavigateCommand(NavigateSecond);
 
@@ -73,25 +57,18 @@ namespace HomeCloud.Desktop.ViewModels
 
         private void NavigateSecond()
         {
-            var currentAssembly = AppDomain.CurrentDomain.GetAssemblies()?.FirstOrDefault(a => a.FullName.Contains(AppDomain.CurrentDomain.FriendlyName));
-            var viewType = currentAssembly.DefinedTypes.SingleOrDefault(t => t.Name.Equals("SecondView"));
-            CurrentView = (ContentControl)Activator.CreateInstance(viewType);
-
-            //_navigationManager.Navigate("SecondViewModel", true);
+            _navigationManager.Navigate("SecondView", true);
         }
 
         private void NavigateFirst()
         {
-            var currentAssembly = AppDomain.CurrentDomain.GetAssemblies()?.FirstOrDefault(a => a.FullName.Contains(AppDomain.CurrentDomain.FriendlyName));
-            var viewType = currentAssembly.DefinedTypes.SingleOrDefault(t => t.Name.Equals("FirstView"));
-            CurrentView = (ContentControl)Activator.CreateInstance(viewType);
-            //_navigationManager.Navigate("FirstViewModel");
+            _navigationManager.Navigate("FirstView");
         }
 
         private void CurrentViewModelChanged()
         {
             if (_navigationManager.CurrentView is null) return;
-            CurrentViewModel = _navigationManager.CurrentView;
+            CurrentView = _navigationManager.CurrentView;
         }
     }
 }

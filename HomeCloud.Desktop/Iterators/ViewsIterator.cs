@@ -114,7 +114,7 @@ namespace HomeCloud.Desktop.Iterators
         {
             if (_controls is null) throw new NullReferenceException(nameof(_controls));
             ContentControl[] controls = new ContentControl[_controls.Length + 1];
-            Array.Copy(_controls, controls, controls.Length);
+            Array.Copy(_controls, controls, _controls.Length);
             controls[controls.Length - 1] = contentControl;
             _controls = controls;
         }
