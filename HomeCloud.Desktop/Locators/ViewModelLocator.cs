@@ -9,7 +9,8 @@ namespace HomeCloud.Desktop.Locators
 {
     public class ViewModelLocator
     {
-        public static IServiceProvider ServiceProvider = App.ServiceProvider ?? throw new ArgumentNullException(nameof(ServiceProvider));
+        public static IServiceProvider ServiceProvider = App.ServiceProvider
+            ?? throw new ArgumentNullException(nameof(ServiceProvider));
 
         public static bool GetAutoConnectedViewModelPRoperty(DependencyObject obj)
         {
@@ -22,10 +23,8 @@ namespace HomeCloud.Desktop.Locators
         }
 
         public static readonly DependencyProperty AutoConnectedViewModelProperty =
-            DependencyProperty.RegisterAttached("AutoConnectedViewModel",
-                                                    typeof(bool),
-                                                    typeof(ViewModelLocator),
-                                                    new PropertyMetadata(false, AutoConnectedViewModelChanged));
+            DependencyProperty.RegisterAttached("AutoConnectedViewModel", typeof(bool), typeof(ViewModelLocator),
+                                                new PropertyMetadata(false,AutoConnectedViewModelChanged));
 
         private static void AutoConnectedViewModelChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
@@ -35,8 +34,9 @@ namespace HomeCloud.Desktop.Locators
             string viewTypeName = viewType.FullName ?? throw new NullReferenceException(nameof(viewType.FullName));
             string viewModelTypeName = string.Concat(viewTypeName.Split('.').Last(), "Model");
 
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            var currentAssembly = assemblies.SingleOrDefault(a => a.FullName is not null && a.FullName.Contains(AppDomain.CurrentDomain.FriendlyName));
+            System.Reflection.Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            System.Reflection.Assembly? currentAssembly = assemblies
+                .SingleOrDefault(a => a.FullName is not null && a.FullName.Contains(AppDomain.CurrentDomain.FriendlyName));
 
             if (currentAssembly is null) throw new NullReferenceException(nameof(currentAssembly));
             Type viewModelType = currentAssembly.DefinedTypes.SingleOrDefault(t => t.Name.Equals(viewModelTypeName))
