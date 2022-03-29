@@ -103,7 +103,7 @@ namespace HomeCloud.Desktop.Managers
         }
 
         /// <summary>
-        /// Check if it is possible the navigate back in the navigation stack
+        /// Check if it is possible to navigate back in the navigation stack
         /// </summary>
         /// <returns>true if </returns>
         public bool CanNavigateBack()
@@ -113,6 +113,10 @@ namespace HomeCloud.Desktop.Managers
             return true;
         }
 
+        /// <summary>
+        /// Check if is possible to navigate next in the navigation stack
+        /// </summary>
+        /// <returns>true If it is possible. false Otherwise</returns>
         public bool CanNavigateNext()
         {
             if (NavigationStack.Position == NavigationStack.Length) return false;
