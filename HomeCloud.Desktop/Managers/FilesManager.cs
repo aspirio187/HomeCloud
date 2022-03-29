@@ -10,8 +10,37 @@ namespace HomeCloud.Desktop.Managers
     public class FilesManager
     {
         public FilesIterator FilesToLoad { get; set; } = new FilesIterator();
-        // Une liste des changements
 
-        // Execute une fonction quand la liste est modifiée 
+        public Task FilesSync { get; private set; }
+
+        public FilesManager()
+        {
+            FilesToLoad.OnElementAdded += FileAdded;
+            FilesToLoad.OnElementDeleted += FileDeleted;
+
+            FilesSync = new Task(SyncFile);
+        }
+
+        private void FileDeleted()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void FileAdded()
+        {
+            if (FilesSync.Status != TaskStatus.Running)
+            {
+                FilesSync.Start();
+            }
+        }
+
+        public void SyncFile()
+        {
+            int i = 0;
+            while(FilesToLoad.Length != 0)
+            {
+
+            }
+        }
     }
 }
