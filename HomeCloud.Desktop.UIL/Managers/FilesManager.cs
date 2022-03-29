@@ -62,6 +62,7 @@ namespace HomeCloud.Desktop.Managers
             while (UploadFiles.Length != 0)
             {
                 // TODO : Instructions to send the file to the server
+                // TODO : Instructions to add modifications in the logger 
                 UploadFiles.RemoveAt(i);
             }
         }

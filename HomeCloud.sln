@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Desktop.BLL", "Ho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Desktop.UIL", "HomeCloud.Desktop.UIL\HomeCloud.Desktop.UIL.csproj", "{2753206D-880A-4A10-83A9-A72E40123CC3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Desktop", "Desktop", "{C8A50D70-3943-4E6E-9F9B-3F42C8FF20E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FF8FD07F-C8DF-4C49-B11C-682F489AEAE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +52,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E135DDB9-D32A-4D73-BF53-49975C07BE23} = {FF8FD07F-C8DF-4C49-B11C-682F489AEAE9}
+		{C35C706E-27AF-4466-B988-C8A6DF792105} = {C8A50D70-3943-4E6E-9F9B-3F42C8FF20E3}
+		{2753206D-880A-4A10-83A9-A72E40123CC3} = {C8A50D70-3943-4E6E-9F9B-3F42C8FF20E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC2321C2-E169-441E-9DE9-971ED9B8FCD4}
