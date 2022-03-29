@@ -63,7 +63,8 @@ namespace HomeCloud.Desktop.Managers
 
             AppDomain currentDomain = AppDomain.CurrentDomain ?? throw new NullReferenceException(nameof(AppDomain.CurrentDomain));
             Assembly[] assemblies = currentDomain.GetAssemblies();
-            _currentAssembly = assemblies.SingleOrDefault(a => a.FullName is not null && a.FullName.Contains(currentDomain.FriendlyName)) ??
+            _currentAssembly = assemblies.SingleOrDefault(a => a.FullName is not null &&
+                                                            a.FullName.Contains(currentDomain.FriendlyName)) ??
                 throw new NullReferenceException(nameof(_currentAssembly));
 
             NavigationStack = new ViewsIterator();
@@ -114,13 +115,38 @@ namespace HomeCloud.Desktop.Managers
         }
 
         /// <summary>
+        /// Navigate to the previous element in the navigation stack. If <see cref="CanNavigateBack"/> is false, nothing happens.
+        /// </summary>
+        public void NavigateBack()
+        {
+            if (CanNavigateBack())
+            {
+                NavigationStack.MovePrevious();
+                CurrentView = NavigationStack.Current;
+            }
+        }
+
+        /// <summary>
         /// Check if is possible to navigate next in the navigation stack
         /// </summary>
         /// <returns>true If it is possible. false Otherwise</returns>
         public bool CanNavigateNext()
         {
+            if (NavigationStack.Length == 0) return false;
             if (NavigationStack.Position == NavigationStack.Length) return false;
             return true;
+        }
+
+        /// <summary>
+        /// Navigate to the next element in the navigation stack. If <see cref="CanNavigateNext()"/> is false, nothing happens.
+        /// </summary>
+        public void NavigateNext()
+        {
+            if (CanNavigateNext())
+            {
+                NavigationStack.MoveNext();
+                CurrentView = NavigationStack.Current;
+            }
         }
     }
 }
