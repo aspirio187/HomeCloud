@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Console", "HomeCl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeCloud.Helpers", "HomeCloud.Helpers\HomeCloud.Helpers.csproj", "{40FD4AD7-5B85-4267-8209-BD645F42CCCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeCloud.Desktop.BLL", "HomeCloud.Desktop.BLL\HomeCloud.Desktop.BLL.csproj", "{C35C706E-27AF-4466-B988-C8A6DF792105}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{40FD4AD7-5B85-4267-8209-BD645F42CCCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40FD4AD7-5B85-4267-8209-BD645F42CCCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40FD4AD7-5B85-4267-8209-BD645F42CCCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C35C706E-27AF-4466-B988-C8A6DF792105}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C35C706E-27AF-4466-B988-C8A6DF792105}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C35C706E-27AF-4466-B988-C8A6DF792105}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C35C706E-27AF-4466-B988-C8A6DF792105}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
