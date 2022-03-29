@@ -35,6 +35,18 @@ namespace HomeCloud.Desktop.Iterators
         public event Action? OnElementDeleted;
 
         /// <summary>
+        /// Get the number of elements in <see cref="FilesIterator"/>
+        /// </summary>
+        public int Length
+        {
+            get
+            {
+                if (_changes is null) throw new NullReferenceException(nameof(_changes));
+                return _changes.Length;
+            }
+        }
+
+        /// <summary>
         /// Instanciate an empty FilesIterator
         /// </summary>
         public FilesIterator()
