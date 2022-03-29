@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Shared", "HomeCloud.Shared\HomeCloud.Shared.csproj", "{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Desktop", "HomeCloud.Desktop\HomeCloud.Desktop.csproj", "{33392223-450B-4945-B4E9-3D89F688F936}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Desktop.UIL", "HomeCloud.Desktop\HomeCloud.Desktop.UIL.csproj", "{33392223-450B-4945-B4E9-3D89F688F936}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Web", "HomeCloud.Web\HomeCloud.Web.csproj", "{E135DDB9-D32A-4D73-BF53-49975C07BE23}"
 EndProject
