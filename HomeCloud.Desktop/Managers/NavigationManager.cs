@@ -98,6 +98,7 @@ namespace HomeCloud.Desktop.Managers
             if (save && !NavigationStack.Any(v => v.ToString().Equals(viewName)))
             {
                 NavigationStack.Add(view);
+                NavigationStack.MoveNext();
             }
         }
 
@@ -108,6 +109,13 @@ namespace HomeCloud.Desktop.Managers
         public bool CanNavigateBack()
         {
             if (NavigationStack.Length == 0) return false;
+            if (NavigationStack.Position == 0) return false;
+            return true;
+        }
+
+        public bool CanNavigateNext()
+        {
+            if (NavigationStack.Position == NavigationStack.Length) return false;
             return true;
         }
     }

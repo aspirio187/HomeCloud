@@ -11,11 +11,6 @@ namespace HomeCloud.Desktop.Iterators
     public class ViewsIterator : IEnumerator<ContentControl>
     {
         /// <summary>
-        /// Position in the list
-        /// </summary>
-        private int _position = -1;
-
-        /// <summary>
         /// Array of ContentControls object which we manipulate
         /// </summary>
         private ContentControl[]? _controls;
@@ -24,6 +19,19 @@ namespace HomeCloud.Desktop.Iterators
         /// Get the Current ContentControl Element of the Array by Calling Current Getter
         /// </summary>
         object IEnumerator.Current => Current;
+
+        /// <summary>
+        /// Position in the list
+        /// </summary>
+        private int _position = -1;
+
+        /// <summary>
+        /// Get the position
+        /// </summary>
+        public int Position
+        {
+            get => _position;
+        }
 
         /// <summary>
         /// Get the Current ContentControl Element
@@ -148,6 +156,22 @@ namespace HomeCloud.Desktop.Iterators
             if (_position + 1 < _controls.Length)
             {
                 _position++;
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Move to the previous element in the iterator
+        /// </summary>
+        /// <returns>true If moving to the previous element is possible. false Otherwise</returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public bool MovePrevious()
+        {
+            if (_controls is null) throw new NullReferenceException(nameof(_controls));
+            if (_position - 1 >= 0)
+            {
+                _position--;
                 return true;
             }
             return false;
