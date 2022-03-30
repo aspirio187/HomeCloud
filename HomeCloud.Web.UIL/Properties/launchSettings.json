@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "HomeCloud.Web": {
+    "HomeCloud.Web.UIL": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

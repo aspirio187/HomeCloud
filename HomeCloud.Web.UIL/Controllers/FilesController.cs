@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HomeCloud.Web.Controllers
+namespace HomeCloud.Web.UIL.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

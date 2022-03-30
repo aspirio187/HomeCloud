@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace HomeCloud.Web.Hubs
+namespace HomeCloud.Web.UIL.Hubs
 {
     public class CloudHub : Hub
     {

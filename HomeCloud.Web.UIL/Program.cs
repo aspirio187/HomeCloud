@@ -1,4 +1,4 @@
-using HomeCloud.Web.Hubs;
+using HomeCloud.Web.UIL.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 

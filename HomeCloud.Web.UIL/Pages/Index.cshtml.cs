@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace HomeCloud.Web.Pages
+namespace HomeCloud.Web.UIL.Pages
 {
     public class IndexModel : PageModel
     {
