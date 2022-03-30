@@ -1,6 +1,7 @@
 ﻿using HomeCloud.Desktop.Iterators;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace HomeCloud.Desktop.Managers
         /// <exception cref="NotImplementedException"></exception>
         private void FileDeleted()
         {
-            throw new NotImplementedException();
+            Debug.WriteLine("Une erreur est survenue dans le FilesManager");
         }
 
         /// <summary>
@@ -47,14 +48,23 @@ namespace HomeCloud.Desktop.Managers
         /// </summary>
         private void FileAdded()
         {
-            if (FilesSync.Status != TaskStatus.Running)
+            if (FilesSync.Status == TaskStatus.Created)
             {
                 FilesSync.Start();
+            }
+            else if (FilesSync.Status == TaskStatus.RanToCompletion)
+            {
+                FilesSync = new Task(SyncFile);
+                FilesSync.Start();
+            }
+            else
+            {
+
             }
         }
 
         /// <summary>
-        /// <see cref="FilesSync"/>'s action run when an element is added in <see cref="UploadFiles"/>
+        /// <see cref="FilesSync"/>'s action executed when an element is added in <see cref="UploadFiles"/>
         /// </summary>
         public void SyncFile()
         {
@@ -62,7 +72,8 @@ namespace HomeCloud.Desktop.Managers
             while (UploadFiles.Length != 0)
             {
                 // TODO : Instructions to send the file to the server
-                // TODO : Instructions to add modifications in the logger 
+                // TODO : Instructions to add modifications in the logger
+                Debug.WriteLine($"Type : {UploadFiles[i].ChangeType} | File : {UploadFiles[0].FileFullPath}");
                 UploadFiles.RemoveAt(i);
             }
         }

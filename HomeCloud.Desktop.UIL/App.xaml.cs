@@ -34,6 +34,7 @@ namespace HomeCloud.Desktop
             /****************************************/
 
             services.AddSingleton<NavigationManager>();
+            services.AddScoped<FilesManager>();
 
             /****************************************/
             /************* ViewModels ***************/

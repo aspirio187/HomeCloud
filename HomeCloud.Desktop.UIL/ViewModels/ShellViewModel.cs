@@ -3,6 +3,7 @@ using HomeCloud.Desktop.Managers;
 using HomeCloud.Shared;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace HomeCloud.Desktop.ViewModels
     public class ShellViewModel : ViewModelBase
     {
         private readonly NavigationManager _navigationManager;
+        private readonly FilesManager _filesManager;
         private readonly Watcher _watcher;
 
         public ICommand NavigateFirstCommand { get; set; }
@@ -43,33 +45,36 @@ namespace HomeCloud.Desktop.ViewModels
             }
         }
 
-        public ShellViewModel(NavigationManager navigationManager)
+        public ShellViewModel(NavigationManager navigationManager, FilesManager filesManager)
         {
             _navigationManager = navigationManager ??
                 throw new ArgumentNullException(nameof(navigationManager));
+
+            _filesManager = filesManager ??
+                throw new ArgumentNullException(nameof(filesManager));
 
             NavigateFirstCommand = new NavigateCommand(NavigateFirst);
             NavigateSecondCommand = new NavigateCommand(NavigateSecond);
 
             _navigationManager.OnCurrentViewChanged += CurrentViewModelChanged;
 
-            _watcher = new Watcher(@"C: \Users\soult\Desktop\Dossier à surveiller");
-            _watcher.OnErrorOnccured += async (change) => await WatcherErrorOccured(change);
-            _watcher.OnChangesOccured += async (change) => await WatcherChangesOccured(change);
+            _watcher = new Watcher(@"C:\Users\soult\Desktop\Dossier à surveiller");
+            _watcher.OnErrorOnccured +=  WatcherErrorOccured;
+            _watcher.OnChangesOccured +=  WatcherChangesOccured;
 
             _watcher.Start();
 
             NavigateFirstCommand.Execute(this);
         }
 
-        private async Task WatcherChangesOccured(Change change)
+        private void WatcherChangesOccured(Change change)
         {
-            throw new NotImplementedException();
+            _filesManager.UploadFiles.Add(change);
         }
 
-        private async Task WatcherErrorOccured(Exception e)
+        private void WatcherErrorOccured(Exception e)
         {
-            throw new NotImplementedException();
+            Debug.WriteLine($"Une erreur est survenue dans le Shell");
         }
 
         private void NavigateSecond()

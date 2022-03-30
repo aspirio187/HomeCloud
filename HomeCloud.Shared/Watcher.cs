@@ -179,6 +179,10 @@ namespace HomeCloud.Shared
         /// <param name="e"></param>
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
+            if (e.ChangeType != WatcherChangeTypes.Changed)
+            {
+                return;
+            }
             Change change = new Change(ChangeType.Changed, e.FullPath);
             OnChangesOccured?.Invoke(change);
         }
