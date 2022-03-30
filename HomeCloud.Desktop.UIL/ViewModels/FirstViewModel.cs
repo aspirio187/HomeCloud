@@ -8,9 +8,9 @@ namespace HomeCloud.Desktop.ViewModels
 {
     public class FirstViewModel : ViewModelBase
     {
-        private string _welcomeText;
+        private string? _welcomeText;
 
-        public string WelcomeText
+        public string? WelcomeText
         {
             get { return _welcomeText; }
             set

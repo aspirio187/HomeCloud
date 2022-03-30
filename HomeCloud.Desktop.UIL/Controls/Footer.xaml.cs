@@ -20,11 +20,8 @@ namespace HomeCloud.Desktop.Controls
     /// </summary>
     public partial class Footer : UserControl
     {
-        public static readonly DependencyProperty StatusProperty = DependencyProperty.Register("Status", typeof(bool), typeof(Footer));
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(string), typeof(Footer));
+        public static readonly DependencyProperty StatusProperty = DependencyProperty.Register(nameof(Status), typeof(bool), typeof(Footer));
         public bool Status { get; set; }
-
-        public string Value { get; set; }
 
         public Footer()
         {

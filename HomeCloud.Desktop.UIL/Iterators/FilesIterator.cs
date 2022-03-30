@@ -97,6 +97,7 @@ namespace HomeCloud.Desktop.Iterators
             if (index < 0 || index >= _changes.Length) throw new IndexOutOfRangeException(nameof(index));
 
             _changes = _changes.RemoveAt(index);
+            OnElementDeleted?.Invoke();
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using HomeCloud.Shared.Helpers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
@@ -87,7 +88,7 @@ namespace HomeCloud.Shared
         /// </summary>
         public void Start()
         {
-            if (FileWatcher is not null) throw new Exception($"Stop the previous Watcher before starting a new one!");
+            if (FileWatcher != null) throw new Exception($"Stop the previous Watcher before starting a new one!");
 
             FileWatcher = new FileSystemWatcher(_directoryAbsolutePath);
 

@@ -16,7 +16,8 @@ namespace HomeCloud.Web.UIL.Controllers
         [HttpPost]
         public IActionResult SaveFile(Change change, IFormFile file)
         {
-            if(change is null) return BadRequest(nameof(change));
+            if (change is null) return BadRequest(nameof(change));
+            return Ok();
         }
     }
 }
