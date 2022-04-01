@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HomeCloud.Helpers
+namespace HomeCloud.Shared
 {
     public static class ArrayHelpers
     {

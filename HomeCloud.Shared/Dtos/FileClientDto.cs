@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HomeCloud.Helpers.Dtos
+namespace HomeCloud.Shared.Dtos
 {
     public class FileClientDto
     {
