@@ -1,4 +1,5 @@
 ﻿using HomeCloud.FSWatcher;
+using HomeCloud.Shared.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,9 @@ namespace HomeCloud.Web.UIL.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveFile(Change change, IFormFile file)
+        public IActionResult SaveFile([FromForm] FileClientTransferDto fileClient)
         {
-            if (change is null) return BadRequest(nameof(change));
+            if (fileClient is null) return BadRequest(nameof(fileClient));
             return Ok();
         }
     }

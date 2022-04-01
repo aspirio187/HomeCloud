@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HomeCloud.Desktop.BLL\HomeCloud.Desktop.BLL.csproj" />
     <ProjectReference Include="..\HomeCloud.Shared\HomeCloud.Shared.csproj" />
     <ProjectReference Include="..\HomeCloud.FSWatcher\HomeCloud.FSWatcher.csproj" />
   </ItemGroup>

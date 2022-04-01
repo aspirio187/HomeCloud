@@ -1,4 +1,5 @@
-﻿using HomeCloud.Desktop.Iterators;
+﻿using HomeCloud.Desktop.BLL.Services;
+using HomeCloud.Desktop.Iterators;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,6 +14,7 @@ namespace HomeCloud.Desktop.Managers
     /// </summary>
     public class FilesManager
     {
+        private readonly FileService _fileService;
         /// <summary>
         /// The enumerable in which every changes are loaded
         /// </summary>
@@ -28,10 +30,12 @@ namespace HomeCloud.Desktop.Managers
         /// </summary>
         public FilesManager()
         {
+            _fileService = new FileService();
+
             UploadFiles.OnElementAdded += FileAdded;
             UploadFiles.OnElementDeleted += FileDeleted;
 
-            FilesSync = new Task(SyncFile);
+            FilesSync = new Task(async () => await SyncFile());
         }
 
         /// <summary>
@@ -54,7 +58,7 @@ namespace HomeCloud.Desktop.Managers
             }
             else if (FilesSync.Status == TaskStatus.RanToCompletion)
             {
-                FilesSync = new Task(SyncFile);
+                FilesSync = new Task(async () => await SyncFile());
                 FilesSync.Start();
             }
             else
@@ -66,7 +70,7 @@ namespace HomeCloud.Desktop.Managers
         /// <summary>
         /// <see cref="FilesSync"/>'s action executed when an element is added in <see cref="UploadFiles"/>
         /// </summary>
-        public void SyncFile()
+        public async Task SyncFile()
         {
             int i = 0;
             while (UploadFiles.Length != 0)
@@ -74,6 +78,7 @@ namespace HomeCloud.Desktop.Managers
                 // TODO : Instructions to send the file to the server
                 // TODO : Instructions to add modifications in the logger
                 Debug.WriteLine($"Type : {UploadFiles[i].ChangeType} | File : {UploadFiles[0].FileFullPath}");
+                await _fileService.SendFile(UploadFiles[i]);
                 UploadFiles.RemoveAt(i);
             }
         }

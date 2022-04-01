@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HomeCloud.FSWatcher\HomeCloud.FSWatcher.csproj" />
+    <ProjectReference Include="..\HomeCloud.Shared\HomeCloud.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -22,13 +22,13 @@ namespace HomeCloud.FSWatcher
         /// <summary>
         /// Describes the full file path.
         /// </summary>
-        public string? FileFullPath { get; private set; }
+        public string FileFullPath { get; private set; }
 
         /// <summary>
         /// Describes the file's old name with the full path to the file
         /// Changes only in case of Renamed change type.
         /// </summary>
-        public string? OldPath { get; private set; }
+        public string OldPath { get; private set; }
 
         /// <summary>
         /// Change object
@@ -39,7 +39,7 @@ namespace HomeCloud.FSWatcher
         /// <code>ChangesEnum.Renamed</c> <</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
-        public Change(ChangeType changes, string fullPath, string? oldPath = null)
+        public Change(ChangeType changes, string fullPath, string oldPath = "")
         {
             if (fullPath is null) throw new ArgumentNullException(nameof(fullPath));
             if (fullPath.Trim().Length <= 0) throw new ArgumentException($"{nameof(fullPath)} cannot be an empty string!");
@@ -61,8 +61,11 @@ namespace HomeCloud.FSWatcher
             {
                 if (oldPath is null) throw new ArgumentNullException(nameof(oldPath));
                 if (oldPath.Trim().Length <= 0) throw new ArgumentException($"{nameof(oldPath)} cannot be an empty string!");
-
                 OldPath = oldPath;
+            }
+            else
+            {
+                OldPath = fullPath;
             }
         }
     }
