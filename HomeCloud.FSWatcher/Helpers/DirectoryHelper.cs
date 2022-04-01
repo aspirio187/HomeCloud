@@ -8,7 +8,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-namespace HomeCloud.Shared.Helpers
+namespace HomeCloud.FSWatcher.Helpers
 {
     internal static class DirectoryHelper
     {

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Watcher", "HomeCloud.Shared\HomeCloud.Watcher.csproj", "{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Console", "HomeCloud.Console\HomeCloud.Console.csproj", "{54CDB7DD-0FD6-4D20-91AA-837FCCC90A24}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Helpers", "HomeCloud.Helpers\HomeCloud.Helpers.csproj", "{40FD4AD7-5B85-4267-8209-BD645F42CCCC}"
@@ -23,16 +21,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.Web.BLL", "HomeCl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{62856C9D-8062-42CE-B20C-3AD37C8D61BB}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeCloud.FSWatcher", "HomeCloud.FSWatcher\HomeCloud.FSWatcher.csproj", "{934B93E1-1AF1-46E8-A637-AD890062F659}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{54CDB7DD-0FD6-4D20-91AA-837FCCC90A24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{54CDB7DD-0FD6-4D20-91AA-837FCCC90A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54CDB7DD-0FD6-4D20-91AA-837FCCC90A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,17 +53,21 @@ Global
 		{63436535-5B0D-454F-8B71-F17F77DDE48A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63436535-5B0D-454F-8B71-F17F77DDE48A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63436535-5B0D-454F-8B71-F17F77DDE48A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{934B93E1-1AF1-46E8-A637-AD890062F659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{934B93E1-1AF1-46E8-A637-AD890062F659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{934B93E1-1AF1-46E8-A637-AD890062F659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{934B93E1-1AF1-46E8-A637-AD890062F659}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{31BBF0B6-0821-4ED6-BD12-87CA7E2D92F2} = {62856C9D-8062-42CE-B20C-3AD37C8D61BB}
 		{40FD4AD7-5B85-4267-8209-BD645F42CCCC} = {62856C9D-8062-42CE-B20C-3AD37C8D61BB}
 		{C35C706E-27AF-4466-B988-C8A6DF792105} = {C8A50D70-3943-4E6E-9F9B-3F42C8FF20E3}
 		{2753206D-880A-4A10-83A9-A72E40123CC3} = {C8A50D70-3943-4E6E-9F9B-3F42C8FF20E3}
 		{38029944-3076-45E6-BF25-7CC9994E30F3} = {FF8FD07F-C8DF-4C49-B11C-682F489AEAE9}
 		{63436535-5B0D-454F-8B71-F17F77DDE48A} = {FF8FD07F-C8DF-4C49-B11C-682F489AEAE9}
+		{934B93E1-1AF1-46E8-A637-AD890062F659} = {62856C9D-8062-42CE-B20C-3AD37C8D61BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC2321C2-E169-441E-9DE9-971ED9B8FCD4}

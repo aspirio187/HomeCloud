@@ -1,4 +1,4 @@
-﻿using HomeCloud.Shared;
+﻿using HomeCloud.FSWatcher;
 
 Watcher watcher = new Watcher(@"C:\Users\soult\Desktop\Dossier à surveiller");
 

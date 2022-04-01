@@ -1,4 +1,4 @@
-﻿using HomeCloud.Shared.Helpers;
+﻿using HomeCloud.FSWatcher.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +8,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HomeCloud.Shared
+namespace HomeCloud.FSWatcher
 {
     /// <summary>
     /// 

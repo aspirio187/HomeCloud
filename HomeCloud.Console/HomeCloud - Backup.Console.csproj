@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="IServices\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\HomeCloud.FSWatcher\HomeCloud.FSWatcher.csproj" />
+    <ProjectReference Include="..\HomeCloud.Shared\HomeCloud.FSWatcher.csproj" />
     <ProjectReference Include="..\HomeCloud.FSWatcher\HomeCloud.FSWatcher.csproj" />
   </ItemGroup>
 

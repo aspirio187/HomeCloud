@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HomeCloud.Shared.Helpers
+namespace HomeCloud.FSWatcher.Helpers
 {
     public static class FileHelper
     {

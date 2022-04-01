@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HomeCloud.Shared
+namespace HomeCloud.FSWatcher
 {
     /// <summary>
     /// Represent the different types of changes that can occur

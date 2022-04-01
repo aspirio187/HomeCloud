@@ -1,5 +1,5 @@
 ﻿using HomeCloud.Helpers;
-using HomeCloud.Shared;
+using HomeCloud.FSWatcher;
 using System;
 using System.Collections;
 using System.Collections.Generic;

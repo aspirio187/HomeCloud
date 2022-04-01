@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HomeCloud.Shared\HomeCloud.Watcher.csproj" />
+    <ProjectReference Include="..\HomeCloud.FSWatcher\HomeCloud.FSWatcher.csproj" />
   </ItemGroup>
 
 </Project>

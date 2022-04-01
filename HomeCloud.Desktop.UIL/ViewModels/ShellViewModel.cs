@@ -1,6 +1,6 @@
 ﻿using HomeCloud.Desktop.Commands;
 using HomeCloud.Desktop.Managers;
-using HomeCloud.Shared;
+using HomeCloud.FSWatcher;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

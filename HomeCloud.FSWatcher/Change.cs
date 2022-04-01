@@ -1,11 +1,11 @@
-﻿using HomeCloud.Shared.Helpers;
+﻿using HomeCloud.FSWatcher.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HomeCloud.Shared
+namespace HomeCloud.FSWatcher
 {
     public class Change
     {

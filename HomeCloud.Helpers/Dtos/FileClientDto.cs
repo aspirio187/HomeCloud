@@ -1,4 +1,4 @@
-﻿using HomeCloud.Shared;
+﻿using HomeCloud.FSWatcher;
 using System;
 using System.Collections.Generic;
 using System.Text;
