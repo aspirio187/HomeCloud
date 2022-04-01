@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HomeCloud.Shared\HomeCloud.Shared.csproj" />
+    <ProjectReference Include="..\HomeCloud.Shared\HomeCloud.Watcher.csproj" />
   </ItemGroup>
 
 </Project>
