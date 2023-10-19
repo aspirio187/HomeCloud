@@ -35,14 +35,21 @@ namespace HomeCloud.FSWatcher
         /// </summary>
         /// <param name="changes">The change type that occured</param>
         /// <param name="fullPath">The absolute file path</param>
-        /// <param name="oldPath">The absolute old file path. Needed if <paramref name="changes"/> is 
+        /// <param name="oldPath">The absolute old file path. Needed if <paramref name="changes"/> is
         /// <code>ChangesEnum.Renamed</c> <</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentException"></exception>
         public Change(ChangeType changes, string fullPath, string oldPath = "")
         {
-            if (fullPath is null) throw new ArgumentNullException(nameof(fullPath));
-            if (fullPath.Trim().Length <= 0) throw new ArgumentException($"{nameof(fullPath)} cannot be an empty string!");
+            if (fullPath is null)
+            {
+                throw new ArgumentNullException(nameof(fullPath));
+            }
+
+            if (fullPath.Trim().Length <= 0)
+            {
+                throw new ArgumentException($"{nameof(fullPath)} cannot be an empty string!");
+            }
 
             ChangeType = changes;
 
@@ -59,8 +66,16 @@ namespace HomeCloud.FSWatcher
 
             if (changes == ChangeType.Renamed)
             {
-                if (oldPath is null) throw new ArgumentNullException(nameof(oldPath));
-                if (oldPath.Trim().Length <= 0) throw new ArgumentException($"{nameof(oldPath)} cannot be an empty string!");
+                if (oldPath is null)
+                {
+                    throw new ArgumentNullException(nameof(oldPath));
+                }
+
+                if (oldPath.Trim().Length <= 0)
+                {
+                    throw new ArgumentException($"{nameof(oldPath)} cannot be an empty string!");
+                }
+
                 OldPath = oldPath;
             }
             else

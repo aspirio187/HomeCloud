@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 namespace HomeCloud.FSWatcher
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="e">Exception</param>
     public delegate void OnErrorOccured(Exception e);
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="change"></param>
     public delegate void OnChangesOccured(Change change);
@@ -53,7 +53,11 @@ namespace HomeCloud.FSWatcher
         /// <exception cref="UnauthorizedAccessException"></exception>
         public Watcher(string folderFullPath)
         {
-            if (string.IsNullOrEmpty(folderFullPath)) throw new ArgumentNullException(nameof(folderFullPath));
+            if (string.IsNullOrEmpty(folderFullPath))
+            {
+                throw new ArgumentNullException(nameof(folderFullPath));
+            }
+
             if (!Directory.Exists(folderFullPath))
             {
                 Directory.CreateDirectory(folderFullPath);
@@ -61,11 +65,18 @@ namespace HomeCloud.FSWatcher
             else
             {
                 if (FileHelper.IsFile(folderFullPath))
-                    throw new IOException($"Element at path \"{folderFullPath}\" must be a directory");
+                    throw new IOException(
+                        $"Element at path \"{folderFullPath}\" must be a directory"
+                    );
 
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    if (!DirectoryHelper.DirectoryHasWriteAccess(folderFullPath, WindowsIdentity.GetCurrent().Name))
+                    bool directoryHasWriteAccess = DirectoryHelper.DirectoryHasWriteAccess(
+                        folderFullPath,
+                        WindowsIdentity.GetCurrent().Name
+                    );
+
+                    if (!directoryHasWriteAccess)
                     {
                         throw new UnauthorizedAccessException(folderFullPath);
                     }
@@ -88,17 +99,20 @@ namespace HomeCloud.FSWatcher
         /// </summary>
         public void Start()
         {
-            if (FileWatcher != null) throw new Exception($"Stop the previous Watcher before starting a new one!");
+            if (FileWatcher != null)
+                throw new Exception($"Stop the previous Watcher before starting a new one!");
 
-            FileWatcher = new FileSystemWatcher(_directoryAbsolutePath);
-
-            FileWatcher.NotifyFilter = NotifyFilters.Attributes
-                                 | NotifyFilters.CreationTime
-                                 | NotifyFilters.DirectoryName
-                                 | NotifyFilters.FileName
-                                 | NotifyFilters.Size
-                                 | NotifyFilters.LastAccess
-                                 | NotifyFilters.LastWrite;
+            FileWatcher = new FileSystemWatcher(_directoryAbsolutePath)
+            {
+                NotifyFilter =
+                    NotifyFilters.Attributes
+                    | NotifyFilters.CreationTime
+                    | NotifyFilters.DirectoryName
+                    | NotifyFilters.FileName
+                    | NotifyFilters.Size
+                    | NotifyFilters.LastAccess
+                    | NotifyFilters.LastWrite
+            };
 
             FileWatcher.Changed += OnChanged;
             FileWatcher.Created += OnCreated;
@@ -115,7 +129,8 @@ namespace HomeCloud.FSWatcher
         /// </summary>
         public void Stop()
         {
-            if (FileWatcher is null) throw new Exception($"Watcher cannot be stopped if it hasn't been started!");
+            if (FileWatcher is null)
+                throw new Exception($"Watcher cannot be stopped if it hasn't been started!");
 
             FileWatcher.Changed -= OnChanged;
             FileWatcher.Created -= OnCreated;
